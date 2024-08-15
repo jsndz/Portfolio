@@ -1,0 +1,1 @@
+bg-[url('/bg.jpg')]
