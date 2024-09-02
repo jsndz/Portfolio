@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Kalnia+Glaze:wght@100..700&family=Nixie+One&family=Sevillana&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nixie+One&display=swap"
           rel="stylesheet"
         />
       </head>

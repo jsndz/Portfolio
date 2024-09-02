@@ -2,16 +2,14 @@
 
 import Navbar from "@/components/nav/Navbar";
 import "./globals.css";
-import Hero from "@/components/Hero";
 import { BackgroundBeams } from "@/components/ui/background-beams";
-import HeroX from "@/components/HeroX";
+import HeroX from "@/components/hero/Hero";
 
 function App() {
   return (
     <>
-      <Navbar></Navbar>
       <HeroX></HeroX>
-      <BackgroundBeams className="-z-40 bg-gray-900" />
+      <BackgroundBeams className="-z-40 bg-Navy" />
     </>
   );
 }

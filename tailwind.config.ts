@@ -21,8 +21,13 @@ const config = {
       fontFamily: {
         chelsea: ['"Chelsea Market"', "cursive"],
         nixie: ['"Nixie One"', "cursive"],
+        Montserrat: ['"Montserrat"', "cursive"],
       },
       colors: {
+        Navy: "#070F2B",
+        Lavender: "#9290C3",
+        Indigo: "#535C91",
+        DarkIndigo: "#1B1A55",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -1,0 +1,25 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#main {
+  height: 60vh;
+  width: 70%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 130px;
+  padding-top: 50px;
+}
+#name {
+  font-size: 150px;
+  font-weight: 800;
+}
+
+#flip {
+  display: flex;
+  justify-content: flex-end;
+}
