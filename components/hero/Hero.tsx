@@ -20,6 +20,11 @@ export default function Component() {
           className="text-6xl font-nixie text-Indigo"
         ></FlipWords>
       </div>
+      <h3 className="text-Indigo" id="work">
+        Curious About My Work?
+      </h3>
+
+      <div></div>
     </div>
   );
 }

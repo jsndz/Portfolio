@@ -8,6 +8,7 @@ import HeroX from "@/components/hero/Hero";
 function App() {
   return (
     <>
+      <Navbar></Navbar>
       <HeroX></HeroX>
       <BackgroundBeams className="-z-40 bg-Navy" />
     </>

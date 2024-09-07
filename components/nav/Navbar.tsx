@@ -1,17 +1,24 @@
-import Image from "next/image";
 import React from "react";
-
+import "./nav.css";
+import "remixicon/fonts/remixicon.css";
+import { FloatingDock } from "../ui/floating-dock";
 const Navbar = () => {
+  const links = [
+    {
+      title: "Home",
+      icon: <i className="ri-home-line"></i>,
+      href: "#",
+    },
+
+    {
+      title: "Products",
+      icon: <i className="ri-mail-fill "></i>,
+      href: "#",
+    },
+  ];
   return (
-    <div>
-      <div>
-        <nav className="relative px-4 py-4 flex justify-between items-center ">
-          <div className="max-w-xs max-h-xs overflow-hidden"></div>{" "}
-          <div>
-            <span className="text-white z-10">Contact me</span>
-          </div>
-        </nav>
-      </div>
+    <div id="dock">
+      <FloatingDock items={links} desktopClassName="dark "></FloatingDock>
     </div>
   );
 };

@@ -1,0 +1,7 @@
+#dock {
+  height: 5%;
+  position: fixed;
+  left: 90%;
+  margin-top: 50px;
+  margin-right: 1000px;
+}
