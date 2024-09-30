@@ -2,6 +2,7 @@ import React from "react";
 import "./nav.css";
 import "remixicon/fonts/remixicon.css";
 import { FloatingDock } from "../ui/floating-dock";
+import Image from "next/image";
 const Navbar = () => {
   const links = [
     {
@@ -17,8 +18,15 @@ const Navbar = () => {
     },
   ];
   return (
-    <div id="dock">
-      <FloatingDock items={links} desktopClassName="dark "></FloatingDock>
+    <div>
+      {/* <FloatingDock items={links} desktopClassName="dark "></FloatingDock> */}
+      <Image
+        src="/JSN.png"
+        alt="logo"
+        width="162"
+        height="119"
+        className="pl-10 pt-5"
+      ></Image>
     </div>
   );
 };

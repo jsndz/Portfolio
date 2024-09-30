@@ -1,0 +1,60 @@
+// SCSS variables
+$degPerRotation: 12;
+$scrollSnapDivisions: 8;
+
+// Item transforms and animation names using SCSS loop
+@for $i from 1 through 13 {
+  .item:nth-child(#{$i}n) {
+    transform: rotate(#{($i * $degPerRotation) - 60}deg)
+      translateX(var(--invis-radius));
+    animation-name: item-#{$i};
+  }
+}
+
+// Item animations using SCSS loop
+@for $i from 6 through 13 {
+  @keyframes item-#{$i} {
+    0% {
+      opacity: var(--item-opacity-default);
+    }
+    #{(100 / $scrollSnapDivisions * (($i - 1) - 5))}% {
+      opacity: var(--item-opacity-default);
+    }
+    #{(100 / $scrollSnapDivisions * ($i - 5))}% {
+      opacity: 1;
+    }
+    #{(100 / $scrollSnapDivisions * ($i + 1 - 5))}% {
+      opacity: var(--item-opacity-default);
+    }
+  }
+}
+
+// Make the first item separately
+@keyframes item-5 {
+  0% {
+    opacity: 1;
+  }
+  #{100 / $scrollSnapDivisions}% {
+    opacity: var(--item-opacity-default);
+  }
+}
+
+// Dot animation using SCSS loop
+@keyframes dotAnimation {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  @for $i from 6 through 13 {
+    #{(100 / $scrollSnapDivisions * (($i - 1) - 5))}% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    @if $i > 5 {
+      #{((100 / $scrollSnapDivisions * (($i - 1) - 5)) + ((100 / $scrollSnapDivisions) / 2))}% {
+        opacity: 0;
+        transform: scale(0.2);
+      }
+    }
+  }
+}
