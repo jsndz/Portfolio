@@ -92,7 +92,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     >
       <div id="content">
         <div id="filter">
-          <h1 className="text-white text-[150px] font-extrabold">Projects</h1>
+          <h1 className="text-white text-[150px] font-extrabold">Work</h1>
         </div>
       </div>
       <div className="relative w-full">
