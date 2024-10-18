@@ -6,7 +6,6 @@ import Tech from "@/components/tech/tech";
 import Projects from "@/components/projects/projects";
 import HeroX from "@/components/hero/Hero";
 import About from "@/components/about/about";
-import Foot from "@/components/footer/foot";
 
 function App() {
   return (
