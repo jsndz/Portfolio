@@ -1,0 +1,62 @@
+.projectsContainer {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.carouselContainer {
+  flex: 2;
+  height: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scroll-behavior: smooth;
+}
+
+.carouselContainer::-webkit-scrollbar { 
+  display: none;  /* WebKit */
+}
+
+.carouselItem {
+  height: 100%;
+  scroll-snap-align: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.carouselItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.projectTitles {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+}
+
+.projectTitle {
+  margin: 20px 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.projectTitle:not(.active) {
+  opacity: 0.5;
+}
+
+.projectTitle h2 {
+  font-size: 2em;
+  margin-bottom: 5px;
+}
+
+.projectTitle p {
+  font-size: 1em;
+  margin: 2px 0;
+}
