@@ -1,108 +1,181 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./Projects.module.css";
-import { encode } from "querystring";
-import Image from "next/image";
-interface ProjectItem {
+
+interface Project {
+  id: number;
   title: string;
-  src: string;
-  category: string;
-  subtitle2: string;
-  width: number;
-  height: number;
+  image: string;
+  description: string;
 }
 
+const projects: Project[] = [
+  {
+    id: 1,
+    title: "Noatric",
+    image:
+      "https://api.microlink.io/?url=https%3A%2F%2Fnoatric.vercel.app%2Fhome&screenshot=true&embed=screenshot.url",
+    description: "Ecommerce Website",
+  },
+  {
+    id: 2,
+    title: "SkySense",
+    image:
+      "https://api.microlink.io/?url=https%3A%2F%2Fjsndz.github.io%2FskysenseDeploy%2F&overlay.browser=dark&screenshot=true&embed=screenshot.url",
+    description: "Weather Data",
+  },
+  {
+    id: 3,
+    title: "Ephemera",
+    image:
+      "https://api.microlink.io/?url=https%3A%2F%2Fephemera-rho.vercel.app%2F&overlay.browser=dark&screenshot=true&embed=screenshot.url",
+    description: "Secure Communication",
+  },
+  {
+    id: 4,
+    title: "Building a SQLite with C",
+    image: "/assets/lang/CSS.svg",
+    description: "Database Project",
+  },
+  {
+    id: 5,
+    title: "CLI_Template.js",
+    image: "/assets/lang/CSS.svg",
+    description: "Command Line Tool",
+  },
+  {
+    id: 6,
+    title: "PrimeBoard",
+    image:
+      "https://api.microlink.io/?url=https%3A%2F%2Fprimeboard.vercel.app%2F&overlay.browser=dark&screenshot=true&embed=screenshot.url",
+    description: "Product Leaderboard",
+  },
+  {
+    id: 7,
+    title: "Dept-Emp",
+    image: "/assets/lang/CSS.svg",
+    description: "DBMS Mini-Project",
+  },
+  {
+    id: 8,
+    title: "v4-Parking-Service",
+    image: "/assets/lang/CSS.svg",
+    description: "Smart Parking",
+  },
+  {
+    id: 9,
+    title: "SnapShort",
+    image: "/assets/lang/CSS.svg",
+    description: "URL Shortener",
+  },
+  {
+    id: 10,
+    title: "SnapStory",
+    image: "/assets/lang/CSS.svg",
+    description: "Short Blog Posts",
+  },
+  {
+    id: 11,
+    title: "Twitter backend clone",
+    image: "/assets/lang/CSS.svg",
+    description: "Social Media Backend",
+  },
+];
+
 const Projects: React.FC = () => {
-  const [items, setItems] = useState<ProjectItem[]>([ { title: "Noatric", src: "https://api.microlink.io/?url=https%3A%2F%2Fnoatric.vercel.app%2Fhome&screenshot=true&embed=screenshot.url", width: 1920, height: 1080, category: "Web Application", subtitle2: "Ecommerce Website" }, { title: "SkySense", src: "https://api.microlink.io/?url=https%3A%2F%2Fjsndz.github.io%2FskysenseDeploy%2F&overlay.browser=dark&screenshot=true&embed=screenshot.url", width: 1920, height: 1080, category: "Web Application", subtitle2: "Weather Data" }, { title: "Ephemera", src: "https://api.microlink.io/?url=https%3A%2F%2Fephemera-rho.vercel.app%2F&overlay.browser=dark&screenshot=true&embed=screenshot.url", width: 1920, height: 1080, category: "Web Application", subtitle2: "Secure Communication" }, { title: "Building a SQLite with C", src: "/assets/lang/CSS.svg", width: 1920, height: 1080, category: "Software Development", subtitle2: "Database Project" }, { title: "CLI_Template.js", src: "/assets/lang/CSS.svg", width: 1920, height: 1080, category: "Software Development", subtitle2: "Command Line Tool" }, { title: "PrimeBoard", src: "https://api.microlink.io/?url=https%3A%2F%2Fprimeboard.vercel.app%2F&overlay.browser=dark&screenshot=true&embed=screenshot.url", width: 1920, height: 1080, category: "Web Application", subtitle2: "Product Leaderboard" }, { title: "Dept-Emp", src: "/assets/lang/CSS.svg", width: 1920, height: 1080, category: "Web Application", subtitle2: "DBMS Mini-Project" }, { title: "v4-Parking-Service", src: "/assets/lang/CSS.svg", width: 1920, height: 1080, category: "IoT Development", subtitle2: "Smart Parking" }, { title: "SnapShort", src: "/assets/lang/CSS.svg", width: 1920, height: 1080, category: "Backend Development", subtitle2: "URL Shortener" }, { title: "SnapStory", src: "/assets/lang/CSS.svg", width: 1920, height: 1080, category: "Backend Development", subtitle2: "Short Blog Posts" }, { title: "Twitter backend clone", src: "/assets/lang/CSS.svg", width: 1920, height: 1080, category: "Backend Development", subtitle2: "Social Media Backend" }, ]);
-
   const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  const clonedItems = [...items.slice(-1), ...items, ...items.slice(0, 1)];
+  const [modalOpen, setModalOpen] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (containerRef.current && !isTransitioning) {
-        const scrollPosition = containerRef.current.scrollTop;
-        const itemHeight = containerRef.current.clientHeight;
-        let newIndex = Math.round(scrollPosition / itemHeight) - 1;
-        
-        if (newIndex < 0) {
-          newIndex = items.length - 1;
-          resetScroll(items.length * itemHeight);
-        } else if (newIndex >= items.length) {
-          newIndex = 0;
-          resetScroll(itemHeight);
-        }
-        
+      if (scrollRef.current) {
+        const scrollPosition = scrollRef.current.scrollTop;
+        const imageHeight = scrollRef.current.clientHeight;
+        const newIndex =
+          Math.round(scrollPosition / imageHeight) % projects.length;
         setCurrentIndex(newIndex);
       }
     };
 
-    const resetScroll = (position: number) => {
-      setIsTransitioning(true);
-      if (containerRef.current) {
-        containerRef.current.style.scrollBehavior = 'auto';
-        containerRef.current.scrollTop = position;
-        containerRef.current.style.scrollBehavior = 'smooth';
-      }
-      setTimeout(() => setIsTransitioning(false), 50);
-    };
-
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, [items.length, isTransitioning]);
-
-  useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollTop = (currentIndex + 1) * containerRef.current.clientHeight;
-    }
+    scrollRef.current?.addEventListener("scroll", handleScroll);
+    return () => scrollRef.current?.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleItemClick = (index: number) => {
+  const handleImageClick = (index: number) => {
     setCurrentIndex(index);
-    if (containerRef.current) {
-      containerRef.current.scrollTop = (index + 1) * containerRef.current.clientHeight;
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = index * scrollRef.current.clientHeight;
     }
   };
 
+  const handleTitleClick = (direction: "prev" | "next") => {
+    const newIndex =
+      (currentIndex + (direction === "next" ? 1 : -1) + projects.length) %
+      projects.length;
+    setCurrentIndex(newIndex);
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = newIndex * scrollRef.current.clientHeight;
+    }
+  };
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
   return (
     <div className={styles.projectsContainer}>
-      <div className={styles.carouselContainer} ref={containerRef}>
-        {clonedItems.map((item, index) => (
-          <div 
-            key={index} 
-            className={`${styles.carouselItem} ${index - 1 === currentIndex || (index === clonedItems.length - 1 && currentIndex === 0) || (index === 0 && currentIndex === items.length - 1) ? styles.active : ''}`}
-            onClick={() => handleItemClick(index - 1 < 0 ? items.length - 1 : index - 1 >= items.length ? 0 : index - 1)}
-          ><Image src={item.src} alt="Projects Screenshot" width={item.width} height={item.height} />
-          </div>
-        ))}
-      </div>
-      <div className={styles.projectTitles}>
-        {items.map((item, index) => (
-          <div 
-            key={index} 
-            className={`${styles.projectTitle} ${index === currentIndex ? styles.active : ''}`}
-            onClick={() => handleItemClick(index)}
+      <h1 className={styles.heading}>Projects</h1>
+      <div className={styles.projectsWrapper}>
+        <div className={styles.titleContainer}>
+          <button
+            onClick={() => handleTitleClick("prev")}
+            className={styles.titleButton}
           >
-            <h2>{item.title}</h2>
-            <p>{item.category}</p>
-            <p>{item.subtitle2}</p>
-          </div>
-        ))}
+            {
+              projects[(currentIndex - 1 + projects.length) % projects.length]
+                .title
+            }
+          </button>
+          <h2 className={styles.currentTitle}>
+            {projects[currentIndex].title}
+          </h2>
+          <button
+            onClick={() => handleTitleClick("next")}
+            className={styles.titleButton}
+          >
+            {projects[(currentIndex + 1) % projects.length].title}
+          </button>
+        </div>
+        <div className={styles.imageContainer} ref={scrollRef}>
+          {projects.map((project, index) => (
+            <img
+              key={project.id}
+              src={project.image}
+              alt={project.title}
+              className={`${styles.projectImage} ${
+                index === currentIndex ? styles.active : ""
+              }`}
+              onClick={() =>
+                index === currentIndex ? openModal() : handleImageClick(index)
+              }
+            />
+          ))}
+        </div>
       </div>
+      {modalOpen && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <h2>{projects[currentIndex].title}</h2>
+            <img
+              src={projects[currentIndex].image}
+              alt={projects[currentIndex].title}
+            />
+            <p>{projects[currentIndex].description}</p>
+            <button onClick={closeModal}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
-
-
 
 export default Projects;
