@@ -8,21 +8,14 @@ import ArrowIcon from "../../public/arrow-right-down-line.svg";
 import { CanvasRevealEffect } from "../ui/canvas-reveal-effect";
 import { FlipWords } from "../ui/flip-words";
 import "./Hero.css";
+
 export default function Component() {
   const words = ["developer", "Engineer", "Student"];
   return (
     <div id="main" className="">
       <div id="hero" className="">
         <div id="container">
-          <div id="image" className=" pb-5 absolute  ">
-            <Image
-              src="/file.png"
-              alt="my pic"
-              width="700"
-              height="700"
-              quality={100}
-            />
-          </div>
+          <div id="image" className=" pb-5 absolute  "></div>
           <div id="name" className="z-10">
             <h3 className="text-[48px] font-Montserrat  leading-[100%] text-[#DEDEDE] mb-[-20px] ml-1">
               Hello, I am
